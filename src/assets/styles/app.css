@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-blue: 71 26 135;
+    --color-purple: 88 28 135;
+    --color-pink: 171 48 70;
+    --color-orange: 209 115 65;
+    --color-green: 28 135 88;
+    --color-yellow: 249 248 113;
+    --color-gray: 48 48 48;
+    --color-gray-dark: 40 40 40;
+    --color-gray-light: 56 56 56;
+  }
+}
+
+html {
+    color-scheme: dark;
+}
+
+body {
+    background-color: rgb(var(--color-gray-dark));
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
