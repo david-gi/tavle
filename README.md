@@ -1,5 +1,6 @@
 # Tavle: A Simple Local Kanban Board
 ## A Kanban board in Vue 3 with TypeScript, Pinia, Vite and Tailwind
+[See live demo](https://david-gi.github.io/tavle/)
 ![preview img](https://github.com/david-gi/tavle/blob/main/example.png)
 
 ### Backendless using LocalStorage to save state (alternate API actions included)
