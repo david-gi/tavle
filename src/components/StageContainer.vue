@@ -29,7 +29,7 @@ function save() {
   >
     <div class="h-full">
       <h2 class="text-center font-bold sticky top-0 py-4 mb-4 -mx-4
-          bg-purple border-b-2 border-gray-light shadow-md" >
+          bg-purple border-b-2 border-gray-light shadow-md z-20" >
         <editable-value label="">
           <template #display>
             <span>{{stageName}}</span>

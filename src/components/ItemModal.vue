@@ -20,7 +20,7 @@ const descHeight = ref<string>()
 const item = ref<Item>(props.modelValue)
 watch(props.modelValue, () => updateDate())
 
-const urlLink = computed(() => window.location.origin + '/#' + item.value.name)
+const urlLink = computed(() => window.location.href + '#' + item.value.name)
 
 function updateDate() { item.value.updated = new Date().getTime() }
 
