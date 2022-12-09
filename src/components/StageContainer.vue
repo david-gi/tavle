@@ -1,20 +1,26 @@
 <script setup lang='ts'>
-import { ref, defineEmits, watch } from 'vue'
+import { ref, defineEmits, watch, onMounted } from 'vue'
 import { Stage } from 'src/models/board'
 
 import ItemContainer from './ItemContainer.vue'
 import EditableValue from './base/EditableValue.vue'
 import AdditionPlaceholder from './base/AdditionPlaceholder.vue'
 
-const props = defineProps<{ value: Stage }>()
+const props = defineProps<{ value: Stage, index: number }>()
 const emit = defineEmits<{
   (eventName: 'add-item') : void,
   (eventName: 'open-item', stageIndex: number) : void,
+  (eventName: 'move-item', stageIndex: number, itemId: string) : void,
   (eventName: 'save-name', name: string) : void
 }>()
 
 const stageName = ref(props.value.name)
 watch(stageName, () => save())
+
+function handleDrop(e: DragEvent) {
+  var itemId = e.dataTransfer?.getData('draggedItemId')
+  if (itemId) emit('move-item', props.index, itemId)
+}
 
 function save() {
   stageName.value.length > 0 ? stageName.value : props.value.name
@@ -23,7 +29,9 @@ function save() {
 </script>
 
 <template>
-  <div 
+  <div
+    @drop="handleDrop"
+    @dragenter.prevent @dragover.prevent
     class="grow min-w-min max-w-xs overflow-y-scroll snap-y scroll-mb-6
           no-scrollbar p-4 pt-0 bg-gradient-to-b from-purple to-blue rounded-lg"
   >
@@ -44,7 +52,7 @@ function save() {
         </editable-value>
       </h2>
 
-      <div class="grid grid-flow-row gap-1 auto-rows-max" >
+      <div class="grid grid-flow-row gap-1 auto-rows-max">
         <item-container
           v-for="item, i in value.items"
           :key="'item-'+ item.name + item.created" 

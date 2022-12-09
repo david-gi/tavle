@@ -13,8 +13,8 @@ const { board, ready, selectedItem, selectedStageIndex } = storeToRefs(boardStor
 
 onBeforeMount(async () => boardStore.fetch())
 onMounted(() => {
-  const nameFromUrl = decodeURI(window.location.hash.substring(1))
-  if (window.location.hash.length > 1) boardStore.selectItemByName(nameFromUrl)
+  const idFromUrl = decodeURI(window.location.hash.substring(1))
+  if (window.location.hash.length > 1) boardStore.selectItemById(idFromUrl)
 })
 boardStore.$subscribe(boardStore.save)
 
@@ -60,6 +60,7 @@ function setItemSelection(stageIndex: number, itemIndex: number) {
     } else {
       boardStore.$patch(state => {
         const newItem = {
+          id: Date.now().toString(36),
           name: 'NAME',
           desc: 'DESCRIPTION',
           color: 'blue',
@@ -76,8 +77,10 @@ function setItemSelection(stageIndex: number, itemIndex: number) {
   }, 1)
 }
 
-function moveItem(toStageIndex: number) {
+function moveItem(toStageIndex: number, itemId?: string) {
+  if (itemId) boardStore.selectItemById(itemId)
   boardStore.$patch(state => {
+    
     if (state.selectedItem) {
       const newItemIndex = state.board
         .stages[toStageIndex]
@@ -116,8 +119,10 @@ function deleteItem() {
       v-for="(stage, i) in board.stages"
       :key="'stage-' + stage.name + i"
       :value="stage"
+      :index="i"
       @add-item="setItemSelection(i, -1)"
       @open-item="(itemIndex: number) => setItemSelection(i, itemIndex)"
+      @move-item="moveItem"
       @save-name="(name: string) => editStageName(i, name)"
     />
 

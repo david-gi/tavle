@@ -40,13 +40,14 @@ export const useBoardStore = defineStore('board', () => {
     })
   }
 
-  function selectItemByName(itemName: string) {
+  function selectItemById(id: string) {
     board.value.stages.forEach((s, i) => {
-      const foundItem = <Item>s.items.find(i => i.name == itemName)
+      const foundItem = <Item>s.items.find(i => i.id == id)
       if (foundItem) {
         selectedStageIndex.value = i
         selectedItemIndex.value = s.items.indexOf(foundItem)
         selectedItem.value = foundItem
+        return foundItem
       }
     })
   }
@@ -78,5 +79,5 @@ export const useBoardStore = defineStore('board', () => {
 
   //#endregion
 
-  return { board, selectedStageIndex, selectedItemIndex, selectedItem, ready, fetch, save, selectItemByName }
+  return { board, selectedStageIndex, selectedItemIndex, selectedItem, ready, fetch, save, selectItemById }
 })

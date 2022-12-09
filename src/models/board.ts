@@ -8,6 +8,7 @@ export type Stage = {
 }
 
 export type Item = {
+    id: string,
     name: string,
     desc: string,
     color: string,
