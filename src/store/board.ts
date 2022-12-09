@@ -51,6 +51,8 @@ export const useBoardStore = defineStore('board', () => {
     })
   }
 
+  //#region Alternate API actions
+  
   async function fetchWithApi() {
     // If using an api backend:
     ready.value = false
@@ -73,6 +75,8 @@ export const useBoardStore = defineStore('board', () => {
       })
       .catch(e => console.error(e))
   }
+
+  //#endregion
 
   return { board, selectedStageIndex, selectedItemIndex, selectedItem, ready, fetch, save, selectItemByName }
 })

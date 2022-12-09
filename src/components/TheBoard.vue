@@ -118,7 +118,7 @@ function deleteItem() {
       :value="stage"
       @add-item="setItemSelection(i, -1)"
       @open-item="(itemIndex: number) => setItemSelection(i, itemIndex)"
-      @save="(name: string) => editStageName(i, name)"
+      @save-name="(name: string) => editStageName(i, name)"
     />
 
     <addition-placeholder
