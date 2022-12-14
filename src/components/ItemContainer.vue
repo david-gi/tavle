@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { onMounted } from 'vue'
 import { Item } from '../models/board'
 
 var props = defineProps<{ value: Item }>()
